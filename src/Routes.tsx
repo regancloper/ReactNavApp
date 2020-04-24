@@ -16,9 +16,9 @@ export const Routes: React.FC<RoutesProps> = ({ }) => {
 
     useEffect(() => {
         // check if the user is logged in or not
-        AsyncStorage.getItem('user')
-            .then(userString => {
-                if (userString) {
+        AsyncStorage.getItem('token')
+            .then(token => {
+                if (token) {
                     // decode it
                     login();
                 }
