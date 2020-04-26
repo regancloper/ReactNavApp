@@ -1,9 +1,9 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AppParamList } from './typescript/AppParamList';
-import { AntDesign, Ionicons, EvilIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { HomeStack } from './HomeStack';
-import { SearchStack } from './SearchStack';
+import { ComposeStack } from './ComposeStack';
 
 interface AppTabsProps { }
 
@@ -18,14 +18,13 @@ export const AppTabs: React.FC<AppTabsProps> = ({ }) => {
                     let iconName;
 
                     if (route.name === 'Home') {
-                        iconName = 'ios-information-circle';
-                        return <AntDesign name={"home"} size={size} color={color} />;
-                    } else if (route.name === 'Search') {
-                        iconName = 'ios-list-box';
-                        return <EvilIcons name={"search"} size={size} color={color} />;
+                        iconName = focused
+                            ? 'ios-information-circle'
+                            : 'ios-information-circle-outline';
+                    } else if (route.name === 'Compose') {
+                        iconName = 'ios-create';
                     }
 
-                    // You can return any component that you like here!
                     return <Ionicons name={iconName} size={size} color={color} />;
                 },
             })}
@@ -35,7 +34,7 @@ export const AppTabs: React.FC<AppTabsProps> = ({ }) => {
             }}
         >
             <Tabs.Screen name="Home" component={HomeStack} />
-            <Tabs.Screen name="Search" component={SearchStack} />
+            <Tabs.Screen name="Compose" component={ComposeStack} />
         </Tabs.Navigator >
     );
 }

@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { Button, FlatList, Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { SearchParamList, SearchStackNavProps } from './typescript/SearchParamList';
+import { ComposeParamList, ComposeStackNavProps } from './typescript/ComposeParamList';
 import { Center } from './Center';
 import faker from 'faker';
 
-interface SearchStackProps {
+interface ComposeStackProps {
 
 }
 
-const Stack = createStackNavigator<SearchParamList>();
+const Stack = createStackNavigator<ComposeParamList>();
 
 
-function Search({ navigation }: SearchStackNavProps<'Search'>) {
+function Compose({ navigation }: ComposeStackNavProps<'Compose'>) {
     const [show, setShow] = useState(false)
     return (
         <Center>
-            <Button title="Search Products" onPress={() => {
+            <Button title="Compose Products" onPress={() => {
                 setShow(true);
             }} />
             {show ? <FlatList
@@ -26,7 +26,7 @@ function Search({ navigation }: SearchStackNavProps<'Search'>) {
                         <Button
                             title={item}
                             onPress={() => {
-                                navigation.navigate('SearchResult');
+                                navigation.navigate('ComposeResult');
                             }}
                         />
                     );
@@ -38,19 +38,19 @@ function Search({ navigation }: SearchStackNavProps<'Search'>) {
     );
 }
 
-function SearchResult() {
+function ComposeResult() {
     return (
         <Center>
-            <Text>Thanks for clicking on a search result!</Text>
+            <Text>Thanks for clicking on a Compose result!</Text>
         </Center>
     );
 }
 
-export const SearchStack: React.FC<SearchStackProps> = ({ }) => {
+export const ComposeStack: React.FC<ComposeStackProps> = ({ }) => {
     return (
-        <Stack.Navigator initialRouteName="Search">
-            <Stack.Screen name='Search' component={Search} />
-            <Stack.Screen name='SearchResult' component={SearchResult} />
+        <Stack.Navigator initialRouteName="Compose">
+            <Stack.Screen name='Compose' component={Compose} />
+            <Stack.Screen name='ComposeResult' component={ComposeResult} />
         </Stack.Navigator>
     );
 }

@@ -12,7 +12,7 @@ interface AuthStackProps { }
 
 const Stack = createStackNavigator<AuthParamList>();
 
-function Login({ navigation}: AuthNavProps<'Login'>) {
+function Login({ navigation }: AuthNavProps<'Login'>) {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [loading, setLoading] = useState(false);
@@ -37,7 +37,7 @@ function Login({ navigation}: AuthNavProps<'Login'>) {
         } catch (e) {
             console.log(e);
             throw new Error(e);
-        } 
+        }
     }
 
     if (loading) {
@@ -116,7 +116,9 @@ function Register({
 export const AuthStack: React.FC<AuthStackProps> = ({ }) => {
     return (
         <Stack.Navigator
-            initialRouteName="Login"
+            // screenOptions={{
+            //     header: () => null
+            // }}
         >
             <Stack.Screen
                 options={{

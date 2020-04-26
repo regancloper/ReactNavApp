@@ -10,6 +10,10 @@ export type HomeParamList = {
         name: string;
         submit?: React.MutableRefObject<() => void>;
     };
+    AllBlogs: undefined;
+    SingleBlog: {
+        itemId: number
+    };
 };
 
 export type HomeStackNavProps<T extends keyof HomeParamList> = {

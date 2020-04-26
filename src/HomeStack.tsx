@@ -5,6 +5,8 @@ import { Center } from './Center';
 import { AuthContext } from './AuthProvider';
 import faker from 'faker';
 import { HomeParamList, HomeStackNavProps } from './typescript/HomeParamList';
+import AllBlogs from './components/AllBlogs';
+import SingleBlog from './components/SingleBlog';
 
 interface HomeStackProps { }
 
@@ -78,7 +80,7 @@ function EditProduct({ route, navigation }: HomeStackNavProps<'EditProduct'>) {
 export const HomeStack: React.FC<HomeStackProps> = ({ }) => {
     const { logout } = useContext(AuthContext);
     return (
-        <Stack.Navigator initialRouteName="Feed">
+        <Stack.Navigator initialRouteName="AllBlogs">
             <Stack.Screen
                 options={({ route }) => ({
                     headerTitle: `Edit: ${route.params.name}`,
@@ -118,17 +120,43 @@ export const HomeStack: React.FC<HomeStackProps> = ({ }) => {
                     headerRight: () => {
                         return (
                             <TouchableOpacity
-                                style={{ paddingRight: 8 }}
+                                style={{ paddingRight: 12 }}
                                 onPress={() => {
                                     logout();
                                 }}
                             >
-                                <Text>LOGOUT</Text>
+                                <Text>Logout</Text>
                             </TouchableOpacity>
                         );
                     }
                 }}
                 component={Feed}
+            />
+            <Stack.Screen
+              name="AllBlogs"
+              component={AllBlogs}
+              options={{
+                title: 'My Home',
+                headerRight: () => {
+                    return (
+                        <TouchableOpacity
+                            style={{ paddingRight: 12 }}
+                            onPress={() => {
+                                logout();
+                            }}
+                        >
+                            <Text>Logout</Text>
+                        </TouchableOpacity>
+                    );
+                }
+              }}
+            />
+            <Stack.Screen
+              name="SingleBlog"
+              component={SingleBlog}
+              options={{
+                title: 'Single Blog'
+              }}
             />
         </Stack.Navigator>
     );
