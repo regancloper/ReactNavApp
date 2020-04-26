@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { AuthParamList, AuthNavProps } from './typescript/AuthParamList';
 import { AuthContext } from './AuthProvider';
 import { Center } from './Center';
-import { json, SetAccessToken, getUser } from './utils/api';
+import { json, SetAccessToken } from './utils/api';
 
 
 interface AuthStackProps { }
