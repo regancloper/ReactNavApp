@@ -5,10 +5,11 @@ import { Center } from './Center';
 import { AuthContext } from './AuthProvider';
 import { AppTabs } from './AppTabs';
 import { AuthStack } from './AuthStack';
+import { createStackNavigator } from '@react-navigation/stack';
 
 interface RoutesProps { }
 
-
+const Stack = createStackNavigator();
 
 export const Routes: React.FC<RoutesProps> = ({ }) => {
     const { user, login } = useContext(AuthContext);
@@ -16,9 +17,9 @@ export const Routes: React.FC<RoutesProps> = ({ }) => {
 
     useEffect(() => {
         // check if the user is logged in or not
-        AsyncStorage.getItem('user')
-            .then(userString => {
-                if (userString) {
+        AsyncStorage.getItem('token')
+            .then(token => {
+                if (token) {
                     // decode it
                     login();
                 }
@@ -39,7 +40,21 @@ export const Routes: React.FC<RoutesProps> = ({ }) => {
 
     return (
         <NavigationContainer>
-            {user ? <AppTabs /> : <AuthStack />}
+            <Stack.Navigator>
+                {user ? (
+                    <Stack.Screen
+                        name="AppTabs"
+                        component={AppTabs}
+                        options={{ header: () => null }}
+                    />
+                ) : (
+                        <Stack.Screen
+                            name="AuthStack"
+                            component={AuthStack}
+                            options={{ headerTitle: 'Sign In' }}
+                        />
+                    )}
+            </Stack.Navigator>
         </NavigationContainer>
     );
 }
